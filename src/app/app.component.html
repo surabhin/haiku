@@ -1,5 +1,33 @@
 <div class="main-container">
-  <button class="haiku-btn" mat-fab color="warn" aria-label="Example icon button with a home icon">
+  <button class="haiku-btn" mat-fab color="warn" aria-label="Example icon button with a home icon" (mouseover)="openBubble()">
     <mat-icon>home</mat-icon>
   </button>
+  <div class="bubble" *ngIf="toggleBubble">
+    <button mat-flat-button color="primary" small type="button" (click)="openTodo()"> Tasks</button>
+    <br>
+    <button mat-flat-button color="primary" small type="button" (click)="openReminder()"> Reminders</button>
+  </div>
+  <div class="todo-container" *ngIf="toggleTodo">
+    <h2> Good Evening Joe! </h2>
+    <p> Top 5 tasks for today: </p>
+    <ul>
+      <li *ngFor="let todoItem of todoList" [ngClass]= "{'done': todoItem.completed}">
+        <mat-checkbox primary strong class="todo-checkbox" [checked]= "todoItem.completed" (change)="completeItem(todoItem)">
+          <input type="text" [value]="todoItem.title" />
+        </mat-checkbox>       
+      </li>
+    </ul>
+  </div>
+
+  <div class="todo-container" *ngIf="toggleReminder">
+    <h2> Good Evening Joe! </h2>
+    <p> Top 3 reminders for today: </p>
+    <ul>
+      <li *ngFor="let reminder of reminderList" [ngClass]= "{'done': reminder.completed}">
+        <mat-checkbox primary strong class="todo-checkbox" [checked]= "reminder.completed" (change)="completeItem(reminder)">
+          <input type= text [value]="reminder.title" />
+        </mat-checkbox>       
+      </li>
+    </ul>
+  </div>
 </div>

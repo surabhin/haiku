@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "haiku"
+  "defaultProject": "haiku",
+  "cli": {
+    "analytics": false
+  }
 }
