@@ -1,11 +1,16 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'todo-list';
   todoList = [
     {title: 'Sprint Tasks', completed: false},
@@ -22,6 +27,28 @@ export class AppComponent {
   toggleTodo = false;
   toggleReminder = false;
   toggleBubble = false;
+  openSnackBar;
+  pomodoro;
+
+  constructor(private snackBar: MatSnackBar) {}
+
+  ngOnInit() {
+    setInterval(() => {
+      this.openSnackBar = this.snackBar.open('Drink Water', 'Done!', {
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+      });
+    }, 20000);
+    setInterval(() => {
+      this.pomodoro = this.snackBar.open('You have 25 minutes to work', '', {
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+      });
+    }, 50000);
+    clearInterval(this.openSnackBar);
+    clearInterval(this.pomodoro);
+
+  }
 
   openBubble() {
     this.toggleBubble = !this.toggleBubble;
@@ -38,4 +65,5 @@ export class AppComponent {
   completeItem(item) {
     item.completed = !item.completed;
   }
+
 }
