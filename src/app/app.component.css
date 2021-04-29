@@ -1,0 +1,10 @@
+.main-container {
+  position: relative;
+  height: 100%;
+}
+
+.haiku-btn {
+  position: absolute;
+  right: 30px;
+  bottom: 50px;
+}
